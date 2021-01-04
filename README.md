@@ -15,7 +15,7 @@
 
 ### Association
 - has_many :sells
-- belongs_to :product
+- has_many :product
 
 ## sells テーブル (出品)
 
@@ -33,7 +33,7 @@
 
 ### Association
 - belongs_to :user
-- belongs_to :product
+- has_one :product
 
 ## products テーブル (購入)
 
@@ -51,12 +51,12 @@ has_one :shippingaddress
 
 | Column                | Type   | Options     |
 | --------              | ------ | ----------- |
-| postal_code           | integer   | null: false |
-| prefectures           | integer   | null: false |
+| postal_code           | string    | null: false |
+| shipping_area_id      | integer   | null: false |
 | municipality          | string    | null: false |
 | address               | string    | null: false |
-| building_name         | integer   |
-| phone_number          | integer   | null: false |
+| building_name         | string    |
+| phone_number          | string    | null: false |
 | product               | references|null: false, foreign_key: true|
 
 ### Association
