@@ -15,7 +15,7 @@
 
 ### Association
 - has_many :sells
-- has_many :product
+- has_many :products
 
 ## sells テーブル (出品)
 
