@@ -27,9 +27,9 @@
 | product_condition_id  | integer| null: false |
 | delivery_fee_id       | integer| null: false |
 | shipping_area_id      | integer| null: false |
-| day__id               | integer| null: false |
+| day_id                | integer| null: false |
 | price                 | integer| null: false |
-| user                  | references| null: false, foreign_key: tru |
+| user                  | references| null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -39,21 +39,15 @@
 
 | Column                | Type      | Options     |
 | --------              | ------    | ----------- |
-| user                  | references| null: false, foreign_key: tru |
-| sell                  | references| null: false, foreign_key: tru |
-| postal_code           | integer   | null: false |
-| prefectures           | integer   | null: false |
-| municipality          | string    | null: false |
-| address               | string    | null: false |
-| building_name         | integer   | null: false |
-| phone_number          | integer   | null: false |
+| user                  | references| null: false, foreign_key: true |
+| sell                  | references| null: false, foreign_key: true |
 
 ### Association
 belongs_to :user
 belongs_to :sell
 has_one :shippingaddress
 
-## shipping address
+## shippingaddress
 
 | Column                | Type   | Options     |
 | --------              | ------ | ----------- |
@@ -61,8 +55,9 @@ has_one :shippingaddress
 | prefectures           | integer   | null: false |
 | municipality          | string    | null: false |
 | address               | string    | null: false |
-| building_name         | integer   | null: false |
+| building_name         | integer   |
 | phone_number          | integer   | null: false |
+| product               | references|null: false, foreign_key: true|
 
 ### Association
 belongs_to :product
