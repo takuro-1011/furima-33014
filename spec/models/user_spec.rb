@@ -50,11 +50,23 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include "First name can't be blank"
       end
-  
+
       it 'last_nameがない場合は登録できないこと' do
         @user.last_name = nil
         @user.valid?
         expect(@user.errors.full_messages).to include "Last name can't be blank"
+      end
+
+      it "first_nameは漢字・平仮名・カタカナ以外では登録できない" do
+        @user.first_name = "test"
+        @user.valid?
+        expect(@user.errors.full_messages).to include "First name is invalid"
+      end
+
+      it "last_nameは漢字・平仮名・カタカナ以外では登録できない" do
+        @user.last_name = "test"
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Last name is invalid"
       end
   
       it 'first_name_kanaがない場合は登録できない' do
@@ -69,13 +81,27 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include "Last name kana can't be blank"
       end
   
+      it "first_name_kanaは全角カタカナ以外では登録できない" do
+      binding.pry
+        @user.first_name_kana = "てすと"
+        @user.valid?
+        expect(@user.errors.full_messages).to include "First name kana is invalid"
+      end
+      
+      it "last_name_kanaは全角カタカナ以外では登録できない" do
+        binding.pry
+          @user.last_name_kana = "てすと"
+          @user.valid?
+          expect(@user.errors.full_messages).to include "Last name kana is invalid"
+        end
+
       it 'birthdayがない場合は登録できない' do
         @user.birthday = nil
         @user.valid?
         expect(@user.errors.full_messages).to include "Birthday can't be blank"
       end
     end
-    
+
     context '新規登録がうまくいくとき' do
       it 'passwordが6文字以上であれば登録できる' do
         @user.password = '123456'
