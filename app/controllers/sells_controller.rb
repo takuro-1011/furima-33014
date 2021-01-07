@@ -1,7 +1,7 @@
 class SellsController < ApplicationController
   before_action :authenticate_user!, only: :new
   def index
-    @sell = Sell.order('created_at DESC')
+    @sells = Sell.order('created_at DESC')
   end
 
   def new
