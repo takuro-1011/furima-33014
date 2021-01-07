@@ -1,5 +1,5 @@
 class SellsController < ApplicationController
-  before_action :authenticate_user!, only: :new
+  before_action :authenticate_user!, only: [:new, :edit]
   def index
     @sells = Sell.order('created_at DESC')
   end
@@ -20,6 +20,19 @@ class SellsController < ApplicationController
 
   def show
     @sell = Sell.find(params[:id])
+  end
+
+  def edit
+    @sell = Sell.find(params[:id])
+  end
+
+  def update
+    @sell = Sell.find(params[:id])
+    if @sell.update(sell_params) # updateメソッドの引数tweet_paramsでは、どの情報を更新するかを指定
+      redirect_to sell_path
+    else
+      render :edit
+    end
   end
 
   private
