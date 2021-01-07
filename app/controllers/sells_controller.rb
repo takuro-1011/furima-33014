@@ -18,6 +18,10 @@ class SellsController < ApplicationController
     end
   end
 
+  def show
+    @sell = Sell.find(params[:id])
+  end
+
   private
 
   def sell_params
