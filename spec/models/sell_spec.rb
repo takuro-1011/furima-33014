@@ -37,10 +37,22 @@ RSpec.describe Sell, type: :model do
         expect(@sell.errors.full_messages).to include 'Category is not a number'
       end
 
+      it "category_idはidが1だと出品できない" do
+        @sell.category_id = 1
+        @sell.valid?
+        expect(@sell.errors.full_messages).to include "Category must be other than 1"
+      end
+
       it 'product_condition_idが空だと出品できない' do
         @sell.product_condition_id = nil
         @sell.valid?
         expect(@sell.errors.full_messages).to include 'Product condition is not a number'
+      end
+
+      it "product_condition_idはidが1だと出品できない" do
+        @sell.product_condition_id = 1
+        @sell.valid?
+        expect(@sell.errors.full_messages).to include "Product condition must be other than 1"
       end
 
       it 'delivery_fee_idが空だと出品できない' do
@@ -49,10 +61,22 @@ RSpec.describe Sell, type: :model do
         expect(@sell.errors.full_messages).to include 'Delivery fee is not a number'
       end
 
+      it "delivery_fee_idはidが1だと出品できない" do
+        @sell.delivery_fee_id = 1
+        @sell.valid?
+        expect(@sell.errors.full_messages).to include "Delivery fee must be other than 1"
+      end
+
       it 'day_idが空だと出品できない' do
         @sell.day_id = nil
         @sell.valid?
         expect(@sell.errors.full_messages).to include 'Day is not a number'
+      end
+
+      it "day_idはidが1だと出品できない" do
+        @sell.day_id = 1
+        @sell.valid?
+        expect(@sell.errors.full_messages).to include "Day must be other than 1"
       end
 
       it 'priceが空だと出品できない' do
@@ -72,10 +96,23 @@ RSpec.describe Sell, type: :model do
         @sell.valid?
         expect(@sell.errors.full_messages).to include 'Price must be greater than or equal to 300'
       end
+
       it 'priceが¥9,999,999以上だと出品できない' do
         @sell.price = '10000000'
         @sell.valid?
         expect(@sell.errors.full_messages).to include 'Price must be less than or equal to 9999999'
+      end
+      
+      it "priceは半角英数混合では出品できない" do
+        @sell.price = '11aaa'
+        @sell.valid?
+        expect(@sell.errors.full_messages).to include "Price is not a number"
+      end
+
+      it "半角英語だけでは登録できない" do
+        @sell.price = 'aaaaa'
+        @sell.valid?
+        expect(@sell.errors.full_messages).to include "Price is not a number"
       end
     end
   end
