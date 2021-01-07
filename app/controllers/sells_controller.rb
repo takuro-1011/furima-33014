@@ -1,6 +1,7 @@
 class SellsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
   before_action :move_to_index, only: :edit
+  before_action :set_sell, except: [:index, :new]
   def index
     @sells = Sell.order('created_at DESC')
   end
@@ -10,7 +11,6 @@ class SellsController < ApplicationController
   end
 
   def create
-    @sell = Sell.new(sell_params)
     if @sell.valid?
       @sell.save
       redirect_to root_path
@@ -20,15 +20,13 @@ class SellsController < ApplicationController
   end
 
   def show
-    @sell = Sell.find(params[:id])
   end
 
   def edit
-    @sell = Sell.find(params[:id])
+
   end
 
   def update
-    @sell = Sell.find(params[:id])
     if @sell.update(sell_params) # updateメソッドの引数tweet_paramsでは、どの情報を更新するかを指定
       redirect_to sell_path
     else
@@ -48,5 +46,9 @@ class SellsController < ApplicationController
       unless @sell.user_id == current_user.id
         redirect_to root_path
       end
+  end
+
+  def set_sell
+    @sell = Sell.find(params[:id])
   end
 end
