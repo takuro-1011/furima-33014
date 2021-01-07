@@ -16,10 +16,10 @@
     </div>
     <div class="item-price-box">
       <span class="item-price">
-        <%= @sell.price %>円<br><%= @sell.delivery_fee.name %>
+        <%= @sell.price %>円<br>
       </span>
       <span class="item-postage">
-        <%= '配送料負担' %>
+        <%= @sell.delivery_fee.name %>
       </span>
     </div>
 
