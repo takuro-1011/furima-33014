@@ -1,5 +1,6 @@
 class SellsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
+  before_action :move_to_index, only: :edit
   def index
     @sells = Sell.order('created_at DESC')
   end
@@ -40,5 +41,12 @@ class SellsController < ApplicationController
   def sell_params
     params.require(:sell).permit(:product_name, :product_description, :category_id, :product_condition_id, :delivery_fee_id,
                                  :shipping_area_id, :day_id, :image, :price).merge(user_id: current_user.id)
+  end
+
+  def move_to_index
+    @sell = Sell.find(params[:id])
+      unless @sell.user_id == current_user.id
+        redirect_to root_path
+      end
   end
 end
