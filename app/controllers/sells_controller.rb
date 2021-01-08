@@ -1,6 +1,6 @@
 class SellsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
-  before_action :set_sell, except: [:index, :new, :destroy, :create]
+  before_action :set_sell, except: [:index, :new, :create]
   before_action :move_to_index, only: :edit
   def index
     @sells = Sell.order('created_at DESC')
@@ -35,8 +35,7 @@ class SellsController < ApplicationController
   end
 
   def destroy
-    sell = Sell.find(params[:id])
-    if sell.destroy
+    if @sell.destroy
       redirect_to root_path
     end
   end
