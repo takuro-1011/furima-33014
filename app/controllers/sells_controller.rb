@@ -1,7 +1,7 @@
 class SellsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
-  before_action :move_to_index, only: :edit
   before_action :set_sell, except: [:index, :new, :destroy, :create]
+  before_action :move_to_index, only: :edit
   def index
     @sells = Sell.order('created_at DESC')
   end
@@ -49,7 +49,6 @@ class SellsController < ApplicationController
   end
 
   def move_to_index
-    @sell = Sell.find(params[:id])
     unless @sell.user_id == current_user.id
       redirect_to root_path 
     end
