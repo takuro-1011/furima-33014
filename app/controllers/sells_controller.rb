@@ -1,7 +1,7 @@
 class SellsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
   before_action :set_sell, except: [:index, :new, :create]
-  before_action :move_to_index, only: :edit
+  before_action :move_to_index, only: [:edit, :destroy]
   def index
     @sells = Sell.order('created_at DESC')
   end
