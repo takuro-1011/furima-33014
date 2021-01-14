@@ -45,9 +45,9 @@
 ### Association
 belongs_to :user
 belongs_to :sell
-has_one :shippingaddress
+has_one :address
 
-## shippingaddress
+## address
 
 | Column                | Type   | Options     |
 | --------              | ------ | ----------- |

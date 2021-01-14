@@ -1,6 +1,7 @@
 class Sell < ApplicationRecord
   belongs_to :user
   has_one_attached :image
+  has_one :product
 
   with_options presence: true do
     validates :product_name

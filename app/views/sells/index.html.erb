@@ -135,7 +135,7 @@
 
           <%# 商品が売れていればsold outを表示しましょう %>
           <div class='sold-out'>
-          <% if @sell == @puroduct %>
+          <% if sell.product.present? %>
             <span>Sold Out!!</span>
           <% end %>
           </div>

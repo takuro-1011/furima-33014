@@ -9,9 +9,13 @@
     <div class='item-img-content'>
       <%= image_tag @sell.image ,class:"item-box-img" %>
       <%# 商品が売れている場合は、sold outを表示しましょう %>
+      
       <div class='sold-out'>
+      <% if @sell.product.present? %>
         <span>Sold Out!!</span>
+      <% end %>
       </div>
+      
       <%# //商品が売れている場合は、sold outを表示しましょう %>
     </div>
     <div class="item-price-box">
@@ -24,23 +28,20 @@
     </div>
 
     <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
-    <% if user_signed_in? %>
-      <% if current_user.id == @sell.user_id %>
+    <% if user_signed_in? && @sell.product == nil %>
+      <% if current_user.id == @sell.user_id  %>
         <%= link_to '商品の編集', edit_sell_path, method: :get, class: "item-red-btn" %>
         <p class='or-text'>or</p>
         <%= link_to '削除', sell_path(@sell.id), method: :delete, class:'item-destroy' %>
-      <% else %>
     <%# 商品が売れていない場合はこちらを表示しましょう %>
-        <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
+      <% else %>
+        <%= link_to '購入画面に進む', sell_products_path(@sell.id), method: :get, class:"item-red-btn"%>
       <% end %>
     <% end %>
     <%# //商品が売れていない場合はこちらを表示しましょう %>
-
-
     <%# //ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
-
     <div class="item-explain-box">
-      <span><%= "商品説明" %></span>
+      <span><%= @sell.product_description %></span>
     </div>
     <table class="detail-table">
       <tbody>
