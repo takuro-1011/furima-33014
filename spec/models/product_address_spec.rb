@@ -67,6 +67,13 @@ RSpec.describe ProductAddress, type: :model do
         expect(@product_address.errors.full_messages).to include 'Phone number is invalid'
       end
 
+      it "phone_numberが英数字混合だと購入できない" do 
+      binding.pry
+      @product_address.phone_number = '000000000aaa'
+      @product_address.valid?
+      expect(@product_address.errors.full_messages).to include 'Phone number is invalid'
+      end
+
       it 'tokenが空だと登録できない' do
         @product_address.token = nil
         @product_address.valid?
