@@ -68,7 +68,6 @@ RSpec.describe ProductAddress, type: :model do
       end
 
       it "phone_numberが英数字混合だと購入できない" do 
-      binding.pry
       @product_address.phone_number = '000000000aaa'
       @product_address.valid?
       expect(@product_address.errors.full_messages).to include 'Phone number is invalid'
