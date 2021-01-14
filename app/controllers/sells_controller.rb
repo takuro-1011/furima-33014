@@ -46,7 +46,11 @@ class SellsController < ApplicationController
   end
 
   def move_to_index
-    redirect_to root_path unless @sell.user_id == current_user.id
+    if user_signed_in?
+      if @sell.user_id != current_user.id || @sell.product != nil
+        redirect_to root_path
+      end
+    end
   end
 
   def set_sell

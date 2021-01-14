@@ -37,6 +37,13 @@ RSpec.describe ProductAddress, type: :model do
         expect(@product_address.errors.full_messages).to include "Shipping area can't be blank"
       end
 
+      it "shipping_area_idiが1以外でないと購入できないこと" do
+      binding.pry
+        @product_address.shipping_area_id = 1
+        @product_address.valid?
+        expect(@product_address.errors.full_messages).to include "Shipping area must be other than 1"
+      end
+
       it 'municipalityが空だと購入できない' do
         @product_address.municipality = nil
         @product_address.valid?
