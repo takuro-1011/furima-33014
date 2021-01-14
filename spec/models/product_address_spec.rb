@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe ProductAddress, type: :model do
   before do
-    # user = FactoryBot.build(:user)
-    # sell = FactoryBot.build(:sell)
-    @product_address = FactoryBot.build(:product_address) # sell_id: sell.id, user_id: user.id)
+    user = FactoryBot.create(:user)
+    sell = FactoryBot.create(:sell)
+    @product_address = FactoryBot.build(:product_address, sell_id: sell.id, user_id: user.id)
+    sleep(1)
   end
   describe '購入情報の入力' do
     context '購入がうまくいく時'

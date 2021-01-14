@@ -1,13 +1,11 @@
 class ProductsController < ApplicationController
-
+  before_action :set_sell, only: [:index, :create]
   def index
-    @product_address = ProductAddress.new
     @sell = Sell.find(params[:sell_id])
     redirect_to root_path if current_user == @sell.user || !@sell.product.nil?
   end
 
   def create
-    @sell = Sell.find(params[:sell_id])
     @product_address = ProductAddress.new(product_params)
     if @product_address.valid?
       pay_sell
@@ -33,5 +31,9 @@ class ProductsController < ApplicationController
       card: product_params[:token], # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end
+
+  def set_sell
+    @sell = Sell.find(params[:sell_id])
   end
 end
