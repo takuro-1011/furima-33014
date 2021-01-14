@@ -3,9 +3,7 @@ class ProductsController < ApplicationController
   def index
     @product_address = ProductAddress.new
     @sell = Sell.find(params[:sell_id])
-    if current_user == @sell.user
-      redirect_to root_path
-    elsif @product_address != nil
+    if current_user == @sell.user || @sell.product != nil
       redirect_to root_path
     end
   end

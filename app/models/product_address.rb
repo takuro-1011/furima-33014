@@ -4,13 +4,13 @@ class ProductAddress
   
   with_options presence: true do
     #郵便番号
-    validates :postal_code, format: {with: /\A\d{3}[-]\d{4}\z/ }
+    validates :postal_code, format: {with: /\d{3}-\d{4}/ }
     #市区町村
     validates :municipality
     #番地
     validates :address
     #電話番号
-    validates :phone_number, format: {with: /\A\d{10}\z|\A\d{11}\z/ }
+    validates :phone_number, format: {with: /\A\d{11}\z/ }
     #都道府県
     validates :shipping_area_id, numericality: { other_than: 1 }
     validates :user_id
