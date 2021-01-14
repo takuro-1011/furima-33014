@@ -35,9 +35,7 @@ class SellsController < ApplicationController
   end
 
   def destroy
-    if @sell.destroy
-      redirect_to root_path
-    end
+    redirect_to root_path if @sell.destroy
   end
 
   private
@@ -48,11 +46,8 @@ class SellsController < ApplicationController
   end
 
   def move_to_index
-    unless @sell.user_id == current_user.id
-      redirect_to root_path 
-    end
+    redirect_to root_path unless @sell.user_id == current_user.id
   end
-    
 
   def set_sell
     @sell = Sell.find(params[:id])
