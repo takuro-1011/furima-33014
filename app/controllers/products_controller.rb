@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, only: :index
   before_action :set_sell, only: [:index, :create]
   def index
+    @product_address = ProductAddress.new
     redirect_to root_path if current_user == @sell.user || !@sell.product.nil?
   end
 
