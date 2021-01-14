@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, only: :index
+
   def index
     @product_address = ProductAddress.new
     @sell = Sell.find(params[:sell_id])
