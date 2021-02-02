@@ -17,6 +17,7 @@
 - has_many :sells
 - has_many :products
 
+
 ## sells テーブル (出品)
 
 | Column                | Type   | Options     |
