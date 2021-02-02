@@ -72,6 +72,18 @@
   </div>
   <div class="form-group">
     <div class='form-text-wrap'>
+      <label class="form-text">性別</label>
+      <span class="indispensable">必須</span>
+    </div>
+    <div class='input-name-wrap'>
+      <%= f.label :man, "男性" %>
+      <%= f.radio_button :gender, :man %>
+      <%= f.label :woman, "女性" %>
+      <%= f.radio_button :gender, :woman %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class='form-text-wrap'>
       <label class="form-text">生年月日</label>
       <span class="indispensable">必須</span>
     </div>

@@ -12,7 +12,9 @@ class User < ApplicationRecord
     validates :first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ }
     validates :last_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ }
     validates :birthday
+    validates :gender
   end
   has_many :sells
   has_many :products
+  enum gender: { man: 1, woman: 2 }
 end
